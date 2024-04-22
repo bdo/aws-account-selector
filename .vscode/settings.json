@@ -1,0 +1,6 @@
+{
+  "javascript.format.enable": false,
+  "json.format.enable": false,
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.preferences.importModuleSpecifierEnding": "js"
+}

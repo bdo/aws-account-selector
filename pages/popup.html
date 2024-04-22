@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Account Selector Settings</title>
+  <link rel="stylesheet" href="../styles/popup.css">
+  <script type="module" src="../scripts/popup.js" defer></script>
+</head>
+
+<body>
+  <h1>AWS Account Selector Settings</h1>
+  <div class="fieldset-contents">
+    <h2>Account aliases</h2>
+    <ul id="aliases">
+    </ul>
+    <form id="aliases-form">
+      <input type="text" id="account" placeholder="account name" list="account-list" autocomplete="off" />
+      <datalist id="account-list">
+      </datalist>
+      <input type="text" id="alias" placeholder="alias" />
+      <button type="submit" id="add-account-alias">Add</button>
+    </form>
+  </div>
+</body>
+
+</html>

@@ -14,5 +14,15 @@
       "js": ["scripts/content.js"],
       "matches": ["https://signin.aws.amazon.com/saml"]
     }
-  ]
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["scripts/page.js", "scripts/settings.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "pages/popup.html"
+  },
+  "permissions": ["storage"]
 }

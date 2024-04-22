@@ -1,0 +1,23 @@
+body {
+  min-width: 400px;
+  margin: 0 15px 15px;
+}
+
+h1, h2 {
+  margin: 0 -15px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+  color: #444;
+}
+
+#aliases {
+  list-style-type: none;
+  padding: 0;
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
