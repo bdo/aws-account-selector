@@ -1,4 +1,4 @@
-import { getAliases, getProjectIndex, setAccountNames, setProjectIndex } from './settings.js';
+import { getAliases, getProjectIndex, setAccountNames, setProjectIndex, getSimplifiedRoleNames } from './settings.js';
 
 const ACCOUNT_REGEX = 'Account: (?<accountName>.*?)-(?<env>\\w+) \\((?<accountNumber>\\d+)\\)';
 
@@ -24,14 +24,6 @@ accountNodes.forEach((accountNode) => {
   const account = fullAccountName.match(new RegExp(ACCOUNT_REGEX)).groups;
   if (!accountNames.includes(account.accountName)) accountNames.push(account.accountName);
   Object.assign(accountNode, { ...account, fullAccountName });
-
-  const roles = Array.from(accountNode.querySelectorAll('.saml-role-description'));
-
-  simplifiedRoleNames(roles.map((r) => r.innerText)).forEach((role, i) => {
-    const fullRoleName = roles[i].innerText;
-    roles[i].innerText = role;
-    roles[i].fullRoleName = fullRoleName;
-  });
 });
 
 const initializeProjectSelectorAndRoles = async () => {
@@ -45,6 +37,18 @@ const initializeProjectSelectorAndRoles = async () => {
   });
 
   updateAccountsBasedOnProject(projectSelector.value);
+
+  if ((await getSimplifiedRoleNames()) === false) return;
+  accountNodes.forEach(async (accountNode) => {
+    const roles = Array.from(accountNode.querySelectorAll('.saml-role-description'));
+    const roleNames = roles.map((r) => r.innerText);
+    const simplerRoleNames = simplifiedRoleNames(roleNames);
+    if (simplerRoleNames.some((role, i) => role !== roleNames[i])) {
+      roles.forEach((role, i) => {
+        role.innerHTML = `${simplerRoleNames[i]} <em>(${roleNames[i]})</em>`;
+      });
+    }
+  });
 };
 
 const updateAccountsBasedOnProject = (accountName) => {
@@ -114,4 +118,14 @@ const reorderAccounts = () => {
     document.querySelector('#saml_form').insertAdjacentHTML('afterbegin', projectSelectorHTML);
     await initializeProjectSelectorAndRoles();
   }
+
+  // add a CSS style to the dom
+  const style = document.createElement('style');
+  style.innerHTML = `
+    em {
+      color: #aaa;
+      font-weight: 300;
+    }
+  `;
+  document.head.appendChild(style);
 })();

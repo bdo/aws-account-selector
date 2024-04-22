@@ -10,8 +10,8 @@
 
 <body>
   <h1>AWS Account Selector Settings</h1>
-  <div class="fieldset-contents">
-    <h2>Account aliases</h2>
+  <h2>Account aliases</h2>
+  <section>
     <ul id="aliases">
     </ul>
     <form id="aliases-form">
@@ -21,7 +21,15 @@
       <input type="text" id="alias" placeholder="alias" />
       <button type="submit" id="add-account-alias">Add</button>
     </form>
-  </div>
+  </section>
+  <h2>Other options</h2>
+  <section>
+    <form id="options-form">
+      <!-- Create a modern checkbox for simplifying role names. The checkbox label should be on the right hand side. -->
+      <input type="checkbox" id="simplify-role-names" />
+      <label for="simplify-role-names">Simplify role names</label>
+    </form>
+  </section>
 </body>
 
 </html>

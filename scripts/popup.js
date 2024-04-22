@@ -1,4 +1,10 @@
-import { getAccountNames, getAliases, saveAliases } from './settings.js';
+import {
+  getAccountNames,
+  getSimplifiedRoleNames,
+  getAliases,
+  saveAliases,
+  setSimplifiedRoleNames,
+} from './settings.js';
 
 document.getElementById('aliases-form').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -68,5 +74,11 @@ document.getElementById('add-account-alias').addEventListener('click', async () 
   account.value = '';
   alias.value = '';
 });
+
+const simplifyRoleNamesCheckbox = document.getElementById('simplify-role-names');
+simplifyRoleNamesCheckbox.addEventListener('change', async () => {
+  await setSimplifiedRoleNames(simplifyRoleNamesCheckbox.checked);
+});
+simplifyRoleNamesCheckbox.checked = await getSimplifiedRoleNames();
 
 setTimeout(() => loadConfig(), 100);

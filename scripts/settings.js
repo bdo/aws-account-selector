@@ -39,3 +39,12 @@ export const getProjectIndex = async () => {
   const { storedProjectIndex } = await chrome.storage.local.get(['storedProjectIndex']);
   return storedProjectIndex ?? 0;
 };
+
+export const setSimplifiedRoleNames = async (isSimplified) => {
+  await chrome.storage.local.set({ simplified: isSimplified });
+};
+
+export const getSimplifiedRoleNames = async () => {
+  const { simplified } = await chrome.storage.local.get(['simplified']);
+  return simplified ?? false;
+};
